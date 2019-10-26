@@ -8,7 +8,7 @@ job_data.each{ e->
     infoFile.append("${key_prefix}${e.key}=${comma}${e.value}${comma}\n")
   }
 ```
-Another way is to prefixed function with `@NonCPS`, example:
+:ok: Another way is to prefixed function with `@NonCPS`, example:
 ```groovy
 @NonCPS
 def cloneStringList(list){
@@ -20,7 +20,7 @@ def cloneStringList(list){
     return result
 }
 ```
-Example of **bad code**:
+⚠️ Example of **bad code**:
 ```groovy
   for ( e in job_data ) {
     infoFile.append("${key_prefix}${e.key}=${comma}${e.value}${comma}\n")
