@@ -1,4 +1,7 @@
 # Jenkins
+- https://groovy-lang.org/style-guide.html
+- https://groovyconsole.appspot.com/
+- http://groovy-lang.org/operators.html
 
 ###  Groovy/Avoid serialize errors
 Jenkins needs to serialize state of jobs, so all components must be serializable. There are a special case that have some incidence when you try to develop something using Groovy: iterate over a map/list
@@ -34,4 +37,9 @@ Caused: java.io.NotSerializableException: java.util.LinkedHashMap$Entry
 ```
 * Apply fix proposed at: https://issues.jenkins-ci.org/browse/JENKINS-49732
 
-### Another
+### Var templating
+- https://stackoverflow.com/questions/30512887/variable-substitution-in-jenkins-plugin
+- https://stackoverflow.com/questions/56101952/string-interpolation-in-groovy-with-jenkins-pipeline-file-not-working
+- https://issues.jenkins-ci.org/browse/JENKINS-16660
+- https://javadoc.jenkins-ci.org/hudson/EnvVars.html#expand(java.lang.String 
+- http://docs.groovy-lang.org/latest/html/documentation/index.html#_double_quoted_string
