@@ -4,6 +4,31 @@
 - http://groovy-lang.org/operators.html
 
 ***
+
+### Get Version from file
+<sup><sup>Written: 2019/10/27  Jenkins version: 2.155</sup></sup> 
+```groovy
+def getVersion(){
+    String version = new File(env.WORKSPACE+ '/version.txt').getText('UTF-8')
+    return version.trim() + "." + env.BUILD_NUMBER 
+}
+```
+
+***
+
+### Check if current run is a Replay
+<sup><sup>Written: 2019/10/27  Jenkins version: 2.155</sup></sup> 
+* Found at: https://stackoverflow.com/questions/51555910/how-to-know-inside-jenkinsfile-script-that-current-build-is-a-replay/52302879#52302879
+```groovy
+def isBuildAReplay() {
+  // https://stackoverflow.com/questions/51555910/how-to-know-inside-jenkinsfile-script-that-current-build-is-an-replay/52302879#52302879
+  def replyClassName = "org.jenkinsci.plugins.workflow.cps.replay.ReplayCause"
+  currentBuild.rawBuild.getCauses().any{ cause -> cause.toString().contains(replyClassName) }
+}
+```
+
+***
+
 ### Load a Json 
 <sup><sup>Written: 2019/10/27  Jenkins version: 2.155</sup></sup> 
 ```groovy
@@ -30,6 +55,8 @@ def useJson(loadedJson){
 }
 
 ```
+
+***
 
 ### Groovy: Get class name
 ```groovy
