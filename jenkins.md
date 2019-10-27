@@ -3,7 +3,9 @@
 - https://groovyconsole.appspot.com/
 - http://groovy-lang.org/operators.html
 
-###  Groovy/Avoid serialize errors
+###   Groovy/Avoid serialize errors   
+<sup><sup>Written: 2019/10/26  Jenkins version: 2.155</sup></sup> 
+
 Jenkins needs to serialize state of jobs, so all components must be serializable. There are a special case that have some incidence when you try to develop something using Groovy: iterate over a map/list.
 
 :ok: Good way to iterate over a `Map`:
@@ -41,6 +43,8 @@ Caused: java.io.NotSerializableException: java.util.LinkedHashMap$Entry
 ***
 
 ### Variable substitution from already existing String.
+<sup><sup>Written: 2019/10/26  Jenkins version: 2.155</sup></sup> 
+
 I had a variable comming from a file where I want to act as declared en code, so I want that ${whatever} would be replace but this variable.
 
 Groovy use GString that it have built-in template, that are a different from String of Java.
