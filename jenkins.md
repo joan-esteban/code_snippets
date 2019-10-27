@@ -4,6 +4,32 @@
 - http://groovy-lang.org/operators.html
 
 ***
+### Load a Json 
+<sup><sup>Written: 2019/10/27  Jenkins version: 2.155</sup></sup> 
+```groovy
+// https://stackoverflow.com/questions/37864542/jenkins-pipeline-notserializableexception-groovy-json-internal-lazymap
+@NonCPS
+def loadComponentsFile(filename){
+    //def filename = "components.json"
+    println("Loading JSON file: $filename")
+    def inputFile = new File(env.WORKSPACE + ".//" + filename)
+    def inputJSON = new JsonSlurper().parse(inputFile)
+    return new HashMap<>(inputJSON)
+}
+(...)
+def useJson(loadedJson){
+   def component_keys = loadedJson['components'].keySet() as List
+   for (String item_key: items_keys){
+   	def component =  componentsJson['components'][item_key] 
+	switch(component['type']){ 	
+		case "KEY1":
+			def description = new String(component['description'])
+			(...)
+	}
+   }
+}
+
+```
 
 ### Groovy: Get class name
 ```groovy
