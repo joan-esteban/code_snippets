@@ -134,6 +134,27 @@ node{
 ``` 
 getBinding().hasVariable("MY_PARAM")
 ```
+### Check if a params is defined
+```groovy
+params.containsKey(key)
+```
+:warning: Important: to create 'key' dont use string interpolation (ex: "MY_VAR_${name}") better "MY_VAR_"+name 
+
+### Clone a String List
+- I don't known why, but iterating over a json I lose data, so a create strings (`new String(json['mykey'])` ) and also clone `List`
+```groovy
+@NonCPS
+def cloneStringList(list){
+    println("--- cloneStringList($list)")
+    assert list instanceof List
+    def result = []
+    for (String item : list){
+        result << new String(item)
+    }
+    
+    return result
+}
+```
 
 ##### References
 - https://stackoverflow.com/questions/30512887/variable-substitution-in-jenkins-plugin
