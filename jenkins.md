@@ -69,9 +69,71 @@ On code a string is type `org.codehaus.groovy.runtime.GStringImpl`
 
 When you run a groovy script this point to class `WorkflowScript`
 
+:ok: Solution:
+```groovy
+@NonCPS
+def stringInterpolationWithEnv(str){
+    println("--- stringInterpolationWithEnv($str)")
+    def template = new SimpleTemplateEngine()
+    def variables = new HashMap<>(env.getEnvironment())
+    def t = template.createTemplate(str).make(variables)
+    return new String(t.toString())
+}
+```
 
 ### Trying to use env object to string subtitution
 - Object `env` on a scripted pipeline is type class org.jenkinsci.plugins.workflow.cps.EnvActionImpl.
+
+```groovy
+import groovy.text.SimpleTemplateEngine
+import groovy.lang.Binding
+
+@NonCPS
+def transform(){
+    def javaString = 'This is a Java String because simple quote and $BRANCH_NAME is not interpolated'
+    println("--- ste")
+    def template = new SimpleTemplateEngine()
+    println("--- ge")
+    def mapEnv = env.getEnvironment()
+    println(mapEnv)
+    println("--- tc")
+    def s = template.createTemplate(javaString).make(mapEnv)
+    println("--- render")
+    println(s)
+    println(s.toString())
+}
+
+def myvar = "1234"
+
+transform()
+```
+- Another try usign JsonSlurper:
+   - Item inside map are `java.lang.String`
+```
+@NonCPS
+def transform(filename){
+    def inputFile = new File(env.WORKSPACE + ".//" + filename)
+    def inputJSON = new JsonSlurper().parse(inputFile)
+    def m =  new HashMap<>(inputJSON)
+    println(m['publish']['nas_prefix_path'])
+    println(m['publish']['nas_prefix_path'].getClass().getName())
+    def variables = [
+            INSTALL_NAME: 'name'
+        ]
+    def template = new SimpleTemplateEngine()
+    def t = template.createTemplate(javaString).make(variables)
+    println(t.toString())
+}
+node{
+    println(env.WORKSPACE)
+    transform('jenkins_settings.json')
+}
+
+```
+- note:
+``` 
+getBinding().hasVariable("MY_PARAM")
+```
 
 ##### References
 - https://stackoverflow.com/questions/30512887/variable-substitution-in-jenkins-plugin
@@ -80,7 +142,8 @@ When you run a groovy script this point to class `WorkflowScript`
 - https://javadoc.jenkins-ci.org/hudson/EnvVars.html#expand(java.lang.String 
 - http://docs.groovy-lang.org/latest/html/documentation/index.html#_double_quoted_string
 - http://docs.groovy-lang.org/latest/html/api/groovy/lang/GString.html
-
+- Error `java.lang.ClassCastException: java.io.PrintWriter cannot be cast to java.lang.String`: https://issues.jenkins-ci.org/browse/JENKINS-38432
+- https://stackoverflow.com/questions/28572080/how-to-access-parameters-in-a-parameterized-build
 ***
 
 # Fast scriptAprroval
