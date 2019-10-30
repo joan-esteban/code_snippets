@@ -9,3 +9,9 @@
 // usage:
 #pragma WARNING(FIXME: Code removed because...)
 ```
+# Build from commandline
+- Just work with command.com
+
+```
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\amd64\\msbuild.exe" /m /p:Configuration=Release;Platform=x64;DefineConstants="NO_ORACLE;GPU" /t:Clean,Build .\myproject\myproject.sln
+```
