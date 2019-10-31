@@ -27,9 +27,14 @@
 ```
 set CL=/DY_DEFINE#0
 ```
-
+- Reuse same `DefineConstants` as C#
+- Edit *.vcxproj
+- Search all entries `PreprocessorDefinitions`
+- Add at end ;$(DefineConstants)
 Check:
 - https://stackoverflow.com/questions/14342492/msbuild-c-command-line-can-pass-defines
 - https://stackoverflow.com/questions/479979/msbuild-defining-conditional-compilation-symbols
 - https://docs.microsoft.com/en-us/cpp/build/reference/d-preprocessor-definitions?view=vs-2019
+- https://stackoverflow.com/questions/2016697/msbuild-exe-not-accepting-either-pdefineconstants-nor-ppreprocessordefinitio
+
 
