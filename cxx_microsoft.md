@@ -9,9 +9,27 @@
 // usage:
 #pragma WARNING(FIXME: Code removed because...)
 ```
+
+***
+
+
 # Build from commandline
 - Just work with command.com
 
 ```
 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\amd64\\msbuild.exe" /m /p:Configuration=Release;Platform=x64;DefineConstants="NO_ORACLE;GPU" /t:Clean,Build .\myproject\myproject.sln
 ```
+
+***
+
+# Pass 'defines' to C++/CLI to build using msbuild.exe
+- Using [this](https://docs.microsoft.com/en-us/cpp/build/reference/d-preprocessor-definitions?view=vs-2019) you can define a envoriment variable as:
+```
+set CL=/DY_DEFINE#0
+```
+
+Check:
+- https://stackoverflow.com/questions/14342492/msbuild-c-command-line-can-pass-defines
+- https://stackoverflow.com/questions/479979/msbuild-defining-conditional-compilation-symbols
+- https://docs.microsoft.com/en-us/cpp/build/reference/d-preprocessor-definitions?view=vs-2019
+
