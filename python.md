@@ -15,3 +15,12 @@ class Foo:
 ```
 
 ***
+### PEP 526 -- Syntax for Variable Annotations
+- https://www.python.org/dev/peps/pep-0526/
+Examples:
+~~~
+# 'primes' is a list of integers
+primes = []  # type: List[int]
+stats = {}  # type: Dict[str, int]
+stats: ClassVar[Dict[str, int]] = {}
+~~~
